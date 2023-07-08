@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>View People</title>
+    <title>Personnel Management System</title>
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css" >
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+    <!--<link rel="stylesheet" href="{% static 'easyui/themes/default/easyui.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script! src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script!>-->
+</head>
+<body>
+    <h1>View People</h1>
+
+    <table id="peopleTable" class="easyui-datagrid" style="width: 500px; height: 300px;">
+        <thead>
+            <tr>
+                <th data-options="field:'name'">Name</th>
+                <th data-options="field:'age'">Age</th>
+                <th data-options="field:'ethnicity'">Ethnicity</th>
+                <th data-options="field:'hire_date'">Hire Date</th>
+                <th data-options="field:'education'">Education</th>
+                <th data-options="field:'edit'">Edit</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in people %}
+            <tr>
+                <td>{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+                <td>{{ person.ethnicity }}</td>
+                <td>{{ person.hire_date }}</td>
+                <td>{{ person.education }}</td>
+                <td><a href="{% url 'update_person' person.id %}">edit</a></li></td>
+                
+            </tr>
+            {% endfor %}
+            <div id="toolbar">
+                <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newNews()">新增新闻</a>-->
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editNews()">编辑新闻</a>
+                <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyNews()">移除新闻</a>-->
+            </div>
+            <!--<p>绝对路径 URL: <a href="http://www.runoob.com/">菜鸟教程</a></p>-->
+        </tbody>
+    </table>
+    <script type="text/javascript">
+    //编辑新闻
+    function editPerson(){
+    var row = $('#dg').datagrid('getSelected');
+    console.log(row);
+    if (row){
+        $('#dlg').dialog('open').dialog('center').dialog('setTitle','Edit News');
+        $('#fm').form('load',row);
+        //  ajax 编辑News 并且 通过ajax 保存到后端 SQL
+        url = '/edit/'+row.news_id;
+    }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Personnel Management System</title>
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css" >
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+
+    <!--><link rel="stylesheet" type="text/css" href="{% static 'easyui/themes/default/easyui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'easyui/themes/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'easyui/themes/color.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'easyui/demo/demo.css' %}">
+    <script src="{% static 'easyui/jquery.min.js' %}"></script>
+    <script src="{% static 'easyui/jquery.easyui.min.js' %}"></script>-->
+</head>
+<body>
+    <h1>Personnel Management System</h1>
+    
+    <form method="POST" action="{% url 'add_person' %}">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br>
+        <label for="ethnicity">Ethnicity:</label>
+        <input type="text" id="ethnicity" name="ethnicity" required>
+        <br>
+        <label for="hire_date">Hire Date:</label>
+        <input type="date" id="hire_date" name="hire_date" required>
+        <br>
+        <label for="education">Education:</label>
+        <input type="text" id="education" name="education" required>
+        <br>
+        <button type="submit">Add Person</button>
+    </form>
+</body>
+</html>
